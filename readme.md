@@ -128,6 +128,7 @@ After starting the containers, seed your database schemas and sample data by exe
 sh ```
 docker exec -it pg_main psql -U admin -d maindb
 ```
+
 2. Execute SQL Seed Script
 Inside the psql interactive prompt, run the following commands:
 sh ```

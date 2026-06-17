@@ -91,6 +91,7 @@ Port & Service Matrix:
 | **[AgentA](ca://s?q=Explain_MCP_Agents)** | **8001** | Dedicated Agent for Schema 1 |
 | **[AgentB](ca://s?q=Explain_MCP_Agents)** | **8002** | Dedicated Agent for Schema 2 |
 | **[PostgreSQL](ca://s?q=PostgreSQL_overview)** | **5432** | Core System Database |
+```
 
 Deployment & Setup
 Option 1: Docker Compose (Recommended):
