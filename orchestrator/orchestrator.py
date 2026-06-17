@@ -24,12 +24,12 @@ Decide which agent to use. Respond with exactly 'AgentA' or 'AgentB'.
 
     if "AgentB" in decision:
         agent_name = "AgentB"
-        agent_url = "ws://agentB:8002"
+        agent_url = "ws://agentb:8002"
         fetch_tool = "fetch_schema2_customers"
         analyze_tool = "analyze_customer_data"
     else:
         agent_name = "AgentA"
-        agent_url = "ws://agentA:8001"
+        agent_url = "ws://agenta:8001"
         fetch_tool = "fetch_schema1_customers"
         analyze_tool = "analyze_customer_data"
 

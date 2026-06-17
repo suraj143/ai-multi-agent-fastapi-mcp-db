@@ -1,4 +1,3 @@
-version: "3.9"
 
 services:
   postgres:
@@ -17,7 +16,7 @@ services:
       interval: 5s
       retries: 5
 
-  agentA:
+  agenta:
     build: ./agentA
     container_name: mcp_agentA
     depends_on:
@@ -28,7 +27,7 @@ services:
     ports:
       - "8001:8001"
 
-  agentB:
+  agentb:
     build: ./agentB
     container_name: mcp_agentB
     depends_on:
@@ -43,9 +42,9 @@ services:
     build: ./orchestrator
     container_name: mcp_orchestrator
     depends_on:
-      agentA:
+      agenta:
         condition: service_started
-      agentB:
+      agentb:
         condition: service_started
     env_file:
       - .env

@@ -2,7 +2,7 @@ FROM python:3.11-slim
 
 WORKDIR /app
 
-COPY ../common /app/common
+COPY  gemini_client.py /app/gemini_client.py
 COPY orchestrator.py /app/orchestrator.py
 
 RUN pip install --no-cache-dir google-generativeai mcp fastapi uvicorn
