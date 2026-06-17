@@ -94,13 +94,12 @@ Port & Service Matrix:
 
 Deployment & Setup
 Option 1: Docker Compose (Recommended):
-sh ```
 # Build and run all services in the background
 docker compose up -d --build
 
 # Verify that all containers are running successfully
 docker ps -a
-```
+
 Option 2: Local Development Setup
 If you prefer to run the services individually for testing:
 sh ```
