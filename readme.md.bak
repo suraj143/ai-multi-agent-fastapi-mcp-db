@@ -125,12 +125,13 @@ uvicorn main:app --reload --port 9000
 Database Initialization:
 After starting the containers, seed your database schemas and sample data by executing the following steps.
 1. Access the PostgreSQL CLI container
-sh ```
+```sh
 docker exec -it pg_main psql -U admin -d maindb
 ```
+
 2. Execute SQL Seed Script
 Inside the psql interactive prompt, run the following commands:
-sh ```
+```sh
 -- Create Isolated Schemas
 CREATE SCHEMA customer1;
 CREATE SCHEMA customer2;

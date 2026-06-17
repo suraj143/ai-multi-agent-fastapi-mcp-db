@@ -125,13 +125,13 @@ uvicorn main:app --reload --port 9000
 Database Initialization:
 After starting the containers, seed your database schemas and sample data by executing the following steps.
 1. Access the PostgreSQL CLI container
-sh ```
+```sh
 docker exec -it pg_main psql -U admin -d maindb
 ```
 
 2. Execute SQL Seed Script
 Inside the psql interactive prompt, run the following commands:
-sh ```
+```sh
 -- Create Isolated Schemas
 CREATE SCHEMA customer1;
 CREATE SCHEMA customer2;
@@ -186,7 +186,7 @@ INSERT INTO customer2.customers (name, email, phone, city, country) VALUES
 API Usage & Examples:
 Public Gateway Endpoint (FastAPI):
 Query the system via the entrypoint. The router automatically decides how to process the request based on the context payload.
-sh ```
+```sh
 curl -X POST http://localhost:9000/insights \
   -H "Content-Type: application/json" \
   -d '{
@@ -196,7 +196,7 @@ curl -X POST http://localhost:9000/insights \
 ```
 Internal Orchestrator Endpoint:
 Bypass the entry gateway to hit the engine directly for debugging router configurations
-sh ```
+```sh
 curl -X POST http://localhost:9001/orchestrate \
   -H "Content-Type: application/json" \
   -d '{
