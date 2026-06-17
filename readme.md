@@ -91,19 +91,21 @@ Port & Service Matrix:
 | **[AgentA](ca://s?q=Explain_MCP_Agents)** | **8001** | Dedicated Agent for Schema 1 |
 | **[AgentB](ca://s?q=Explain_MCP_Agents)** | **8002** | Dedicated Agent for Schema 2 |
 | **[PostgreSQL](ca://s?q=PostgreSQL_overview)** | **5432** | Core System Database |
+```
 
 Deployment & Setup
 Option 1: Docker Compose (Recommended):
-sh ```
+```bash
 # Build and run all services in the background
 docker compose up -d --build
 
 # Verify that all containers are running successfully
 docker ps -a
 ```
+
 Option 2: Local Development Setup
 If you prefer to run the services individually for testing:
-sh ```
+```python
 # Install dependencies
 pip install -r requirements.txt
 

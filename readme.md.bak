@@ -94,15 +94,17 @@ Port & Service Matrix:
 
 Deployment & Setup
 Option 1: Docker Compose (Recommended):
+```bash
 # Build and run all services in the background
 docker compose up -d --build
 
 # Verify that all containers are running successfully
 docker ps -a
+```
 
 Option 2: Local Development Setup
 If you prefer to run the services individually for testing:
-sh ```
+```python
 # Install dependencies
 pip install -r requirements.txt
 
