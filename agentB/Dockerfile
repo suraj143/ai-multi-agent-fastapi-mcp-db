@@ -1,12 +1,28 @@
-FROM python:3.11-slim
+#FROM python:3.13-slim
+
+#WORKDIR /app
+
+# Copy shared code
+#COPY common /app/common
+
+# Copy agentB code
+#COPY agentB /app
+
+#COPY requirements.txt /app/requirements.txt
+#RUN pip install --no-cache-dir -r /app/requirements.txt
+
+#CMD ["python", "server.py"]
+
+
+FROM node:22-alpine
 
 WORKDIR /app
 
-COPY gemini_client.py /app/gemini_client.py
-COPY server.py /app/server.py
+COPY common /app/common
+COPY agentB/ /app
 
-RUN pip install --no-cache-dir google-generativeai psycopg2-binary mcp
+RUN npm install
 
-ENV PYTHONUNBUFFERED=1
+ENV NODE_ENV=production
 
-CMD ["python", "server.py"]
+CMD ["npm", "start"]

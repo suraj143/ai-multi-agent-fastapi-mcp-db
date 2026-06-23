@@ -1,11 +1,11 @@
-FROM python:3.11-slim
+FROM python:3.13
 
 WORKDIR /app
 
-COPY main.py /app/main.py
+COPY . /app
 
-RUN pip install --no-cache-dir fastapi uvicorn httpx
+ENV PYTHONPATH="/app"
 
-ENV PYTHONUNBUFFERED=1
+RUN pip install --no-cache-dir -r requirements.txt
 
 CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "9000"]

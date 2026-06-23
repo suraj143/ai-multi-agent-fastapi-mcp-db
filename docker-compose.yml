@@ -1,4 +1,3 @@
-
 services:
   postgres:
     image: postgres:16
@@ -11,13 +10,16 @@ services:
       - "5432:5432"
     volumes:
       - pgdata:/var/lib/postgresql/data
+      - ./postgres/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER}"]
       interval: 5s
       retries: 5
 
   agenta:
-    build: ./agentA
+    build:
+      context: .
+      dockerfile: agentA/Dockerfile
     container_name: mcp_agentA
     depends_on:
       postgres:
@@ -26,9 +28,14 @@ services:
       - .env
     ports:
       - "8001:8001"
+    volumes:
+      - ./agentA:/app/agentA
+      - ./common:/app/common
 
   agentb:
-    build: ./agentB
+    build:
+      context: .
+      dockerfile: agentB/Dockerfile
     container_name: mcp_agentB
     depends_on:
       postgres:
@@ -37,9 +44,14 @@ services:
       - .env
     ports:
       - "8002:8002"
+    volumes:
+      - ./agentB:/app/agentB
+      - ./common:/app/common
 
   orchestrator:
-    build: ./orchestrator
+    build:
+      context: .
+      dockerfile: orchestrator/Dockerfile
     container_name: mcp_orchestrator
     depends_on:
       agenta:
@@ -50,9 +62,14 @@ services:
       - .env
     ports:
       - "9001:9001"
+    volumes:
+      - ./orchestrator:/app/orchestrator
+      - ./common:/app/common
 
   fastapi_app:
-    build: ./fastapi_app
+    build:
+      context: .
+      dockerfile: fastapi_app/Dockerfile
     container_name: fastapi_entry
     depends_on:
       orchestrator:
@@ -61,6 +78,10 @@ services:
       - .env
     ports:
       - "9000:9000"
-
+    environment:
+      PYTHONPATH: "/app"
+    volumes:
+      - ./fastapi_app:/app
+#      - ./orchestrator:/app/orchestrator
 volumes:
   pgdata:

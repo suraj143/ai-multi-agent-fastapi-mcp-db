@@ -1,12 +1,28 @@
-FROM python:3.11-slim
+#FROM python:3.13-slim
+
+#WORKDIR /app
+
+# Copy shared code
+#COPY common /app/common
+
+# Copy orchestrator code
+#COPY orchestrator /app
+
+#COPY requirements.txt /app/requirements.txt
+#RUN pip install --no-cache-dir -r /app/requirements.txt
+
+#CMD ["python", "orchestrator.py"]
+
+
+FROM node:22-alpine
 
 WORKDIR /app
 
-COPY  gemini_client.py /app/gemini_client.py
-COPY orchestrator.py /app/orchestrator.py
+COPY common /app/common
+COPY orchestrator/ /app
 
-RUN pip install --no-cache-dir google-generativeai mcp fastapi uvicorn
+RUN npm install
 
-ENV PYTHONUNBUFFERED=1
+ENV NODE_ENV=production
 
-CMD ["uvicorn", "orchestrator:app", "--host", "0.0.0.0", "--port", "9001"]
+CMD ["npm", "start"]
