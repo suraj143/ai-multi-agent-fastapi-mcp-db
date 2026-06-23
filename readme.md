@@ -1,19 +1,76 @@
-# Multi-Agent AI System with Gemini & MCP
+# 🚀 Multi-Agent AI System with Gemini & MCP
 
-A production-ready, multi-agent AI architecture built to handle isolated data schemas using decentralized intelligence. The system dynamically orchestrates data analysis across separate database environments using LLM-driven reasoning.
-
-## 🚀 Features
-
-* **Gemini 1.5 Flash:** Core engine driving the system's reasoning, agent routing, and final synthesis.
-* **MCP Agents (AgentA & AgentB):** Specialized agents managing distinct data schemas with long-term memory capabilities.
-* **AI-Enabled Orchestrator:** Intelligent router that evaluates tasks and delegates queries to the appropriate agent.
-* **FastAPI Gateway:** High-performance, public-facing REST API.
-* **PostgreSQL Multi-Tenancy:** Single database engine utilizing fully isolated database schemas for data security.
-* **Dockerized Deployment:** Full environment orchestration using Docker Compose.
+A production-ready, multi-agent AI architecture designed to analyze isolated data domains using decentralized intelligence. The platform dynamically orchestrates data analysis across separate PostgreSQL schemas through LLM-driven reasoning powered by Gemini.
 
 ---
 
-## 🏗️ System Architecture
+## 📌 Overview
+
+This system demonstrates how multiple AI agents can independently manage isolated datasets while a central AI orchestrator intelligently routes requests and synthesizes responses.
+
+The architecture enables:
+
+* Secure multi-tenant data isolation
+* Agent-specific reasoning and memory
+* Dynamic task routing
+* LLM-powered analytics
+* Containerized deployment using Docker
+
+---
+
+## ✨ Features
+
+### 🧠 Gemini 1.5 Flash
+
+Acts as the reasoning engine responsible for:
+
+* Agent selection
+* Task routing
+* Data interpretation
+* Final response synthesis
+
+### 🤖 MCP Agents (AgentA & AgentB)
+
+Dedicated AI agents that:
+
+* Operate independently
+* Manage isolated database schemas
+* Perform schema-specific analysis
+* Maintain contextual memory
+
+### 🎯 AI Orchestrator
+
+An intelligent routing layer that:
+
+* Receives incoming requests
+* Evaluates intent
+* Selects the correct agent
+* Aggregates results
+* Produces final AI-generated insights
+
+### ⚡ FastAPI Gateway
+
+Public-facing REST API providing:
+
+* High performance
+* Async request handling
+* Unified entry point
+
+### 🗄 PostgreSQL Multi-Tenancy
+
+Single PostgreSQL instance with:
+
+* Schema-based isolation
+* Secure tenant separation
+* Shared infrastructure
+
+### 🐳 Dockerized Infrastructure
+
+Complete deployment stack managed through Docker Compose.
+
+---
+
+# 🏗 System Architecture
 
 ```text
 FastAPI (Public API)
@@ -27,9 +84,14 @@ AgentA     AgentB
 (schema1)  (schema2)
        │
        ▼
-PostgreSQL (Single DB, Two Schemas)
+PostgreSQL (Single DB, Multiple Schemas)
+```
 
-File Structure:
+---
+
+# 📂 Project Structure
+
+```text
 project/
 │
 ├── docker-compose.yml
@@ -54,8 +116,13 @@ project/
 └── common/
     ├── __init__.py
     └── gemini_client.py
-	
-Real-Time Data Flow:
+```
+
+---
+
+# 🔄 Real-Time Data Flow
+
+```text
 Client
   │
   ▼
@@ -68,75 +135,111 @@ POST /orchestrate (Orchestrator)
 Gemini → Decide Agent
   │
   ├──► AgentA (schema1)
-  │     ├── fetch data
-  │     ├── analyze with Gemini
-  │     └── return results
+  │     ├── Fetch Data
+  │     ├── Analyze with Gemini
+  │     └── Return Results
   │
   └──► AgentB (schema2)
-        ├── fetch data
-        ├── analyze with Gemini
-        └── return results
+        ├── Fetch Data
+        ├── Analyze with Gemini
+        └── Return Results
   │
   ▼
-Orchestrator → Gemini final reasoning
+Orchestrator → Gemini Final Reasoning
   │
   ▼
 FastAPI → Client
-
-Port & Service Matrix:
-| **Component** | **Port** | **Description** |
-| --- | --- | --- |
-| **[FastAPI](ca://s?q=What_is_FastAPI)** | **9000** | Public API Gateway |
-| **[Orchestrator](ca://s?q=What_is_an_AI_Orchestrator)** | **9001** | Internal Router Engine |
-| **[AgentA](ca://s?q=Explain_MCP_Agents)** | **8001** | Dedicated Agent for Schema 1 |
-| **[AgentB](ca://s?q=Explain_MCP_Agents)** | **8002** | Dedicated Agent for Schema 2 |
-| **[PostgreSQL](ca://s?q=PostgreSQL_overview)** | **5432** | Core System Database |
 ```
 
-Deployment & Setup
-Option 1: Docker Compose (Recommended):
-```bash
-# Build and run all services in the background
-docker compose up -d --build
+---
 
-# Verify that all containers are running successfully
+# 🌐 Service & Port Matrix
+
+| Component       | Port | Description               |
+| --------------- | ---- | ------------------------- |
+| FastAPI Gateway | 9000 | Public API Endpoint       |
+| AI Orchestrator | 9001 | Routing & Decision Engine |
+| AgentA          | 8001 | Schema 1 AI Agent         |
+| AgentB          | 8002 | Schema 2 AI Agent         |
+| PostgreSQL      | 5432 | Primary Database          |
+
+---
+
+# 🚀 Deployment
+
+## Option 1: Docker Compose (Recommended)
+
+### Build & Start
+
+```bash
+docker compose up -d --build
+```
+
+### Verify Containers
+
+```bash
 docker ps -a
 ```
 
-Option 2: Local Development Setup
-If you prefer to run the services individually for testing:
-```python
-# Install dependencies
-pip install -r requirements.txt
+---
 
-# Start Agent A
+## Option 2: Local Development
+
+### Install Dependencies
+
+```bash
+pip install -r requirements.txt
+```
+
+### Start Agent A
+
+```bash
 cd agentA
 python server.py
+```
 
-# Start Agent B
+### Start Agent B
+
+```bash
 cd ../agentB
 python server.py
+```
 
-# Start the Public API Gateway
+### Start FastAPI Gateway
+
+```bash
 cd ../fastapi_app
 uvicorn main:app --reload --port 9000
 ```
 
-Database Initialization:
-After starting the containers, seed your database schemas and sample data by executing the following steps.
-1. Access the PostgreSQL CLI container
-```sh
+---
+
+# 🗄 Database Initialization
+
+After all containers are running, initialize PostgreSQL schemas and seed sample data.
+
+## Step 1: Access PostgreSQL
+
+```bash
 docker exec -it pg_main psql -U admin -d maindb
 ```
 
-2. Execute SQL Seed Script
-Inside the psql interactive prompt, run the following commands:
-```sh
--- Create Isolated Schemas
+---
+
+## Step 2: Create Schemas
+
+```sql
 CREATE SCHEMA customer1;
 CREATE SCHEMA customer2;
+```
 
--- Schema 1 Structure
+---
+
+## Step 3: Create Tables
+
+### Schema 1
+
+```sql
 CREATE TABLE IF NOT EXISTS customer1.customers (
     id SERIAL PRIMARY KEY,
     name TEXT,
@@ -145,8 +248,11 @@ CREATE TABLE IF NOT EXISTS customer1.customers (
     city TEXT,
     country TEXT
 );
+```
 
--- Schema 2 Structure
+### Schema 2
+
+```sql
 CREATE TABLE IF NOT EXISTS customer2.customers (
     id SERIAL PRIMARY KEY,
     name TEXT,
@@ -155,38 +261,27 @@ CREATE TABLE IF NOT EXISTS customer2.customers (
     city TEXT,
     country TEXT
 );
-
--- Seed Schema 1 Data
-INSERT INTO customer1.customers (name, email, phone, city, country) VALUES
-('Aarav Kumar', 'aarav.kumar@example.com', '+971501112233', 'Dubai', 'UAE'),
-('Riya Sharma', 'riya.sharma@example.com', '+971502223344', 'Abu Dhabi', 'UAE'),
-('Karan Patel', 'karan.patel@example.com', '+971503334455', 'Sharjah', 'UAE'),
-('Sneha Reddy', 'sneha.reddy@example.com', '+971504445566', 'Hyderabad', 'India'),
-('Vikram Singh', 'vikram.singh@example.com', '+971505556677', 'Delhi', 'India'),
-('Meera Joshi', 'meera.joshi@example.com', '+971506667788', 'Mumbai', 'India'),
-('Arjun Verma', 'arjun.verma@example.com', '+971507778899', 'Dubai', 'UAE'),
-('Pooja Nair', 'pooja.nair@example.com', '+971508889900', 'Kochi', 'India'),
-('Rahul Mehta', 'rahul.mehta@example.com', '+971509990011', 'Pune', 'India'),
-('Divya Kapoor', 'divya.kapoor@example.com', '+971501234567', 'Bangalore', 'India');
-
--- Seed Schema 2 Data
-INSERT INTO customer2.customers (name, email, phone, city, country) VALUES
-('Sameer Khan', 'sameer.khan@example.com', '+971501778899', 'Dubai', 'UAE'),
-('Anita Desai', 'anita.desai@example.com', '+971502889900', 'Abu Dhabi', 'UAE'),
-('Farhan Ali', 'farhan.ali@example.com', '+971503990011', 'Sharjah', 'UAE'),
-('Lakshmi Menon', 'lakshmi.menon@example.com', '+971504110022', 'Chennai', 'India'),
-('Suresh Babu', 'suresh.babu@example.com', '+971505220033', 'Hyderabad', 'India'),
-('Nisha Kulkarni', 'nisha.kulkarni@example.com', '+971506330044', 'Pune', 'India'),
-('Imran Sheikh', 'imran.sheikh@example.com', '+971507440055', 'Dubai', 'UAE'),
-('Harini Iyer', 'harini.iyer@example.com', '+971508550066', 'Bangalore', 'India'),
-('Rohit Chawla', 'rohit.chawla@example.com', '+971509660077', 'Delhi', 'India'),
-('Aditi Rao', 'aditi.rao@example.com', '+971501770088', 'Mumbai', 'India');
 ```
 
-API Usage & Examples:
-Public Gateway Endpoint (FastAPI):
-Query the system via the entrypoint. The router automatically decides how to process the request based on the context payload.
-```sh
+---
+
+## Step 4: Seed Sample Data
+
+Insert sample customer records into both schemas.
+
+> Use the SQL inserts provided in this repository's seed script or deployment guide.
+
+---
+
+# 📡 API Usage
+
+## Public Gateway Endpoint
+
+The API gateway automatically routes requests to the appropriate AI agent.
+
+### Request
+
+```bash
 curl -X POST http://localhost:9000/insights \
   -H "Content-Type: application/json" \
   -d '{
@@ -194,9 +289,24 @@ curl -X POST http://localhost:9000/insights \
     "question": "Give insights"
   }'
 ```
-Internal Orchestrator Endpoint:
-Bypass the entry gateway to hit the engine directly for debugging router configurations
-```sh
+
+### Response
+
+```json
+{
+  "analysis": "Generated customer insights..."
+}
+```
+
+---
+
+## Internal Orchestrator Endpoint
+
+Useful for debugging routing decisions.
+
+### Request
+
+```bash
 curl -X POST http://localhost:9001/orchestrate \
   -H "Content-Type: application/json" \
   -d '{
@@ -204,3 +314,87 @@ curl -X POST http://localhost:9001/orchestrate \
     "question": "Analyze schema2"
   }'
 ```
+
+---
+
+# 🔐 Multi-Tenant Design
+
+The platform uses PostgreSQL schema isolation:
+
+```text
+PostgreSQL
+│
+├── customer1
+│   └── customers
+│
+└── customer2
+    └── customers
+```
+
+Benefits:
+
+* Strong tenant separation
+* Shared infrastructure costs
+* Independent agent reasoning
+* Simplified scaling
+
+---
+
+# 📈 Example Use Cases
+
+* Customer analytics
+* Multi-tenant SaaS platforms
+* AI-powered business intelligence
+* Data domain isolation
+* Autonomous agent ecosystems
+* Enterprise AI orchestration
+
+---
+
+# 🛠 Technology Stack
+
+| Layer            | Technology       |
+| ---------------- | ---------------- |
+| AI Engine        | Gemini 1.5 Flash |
+| Agent Framework  | MCP              |
+| API Gateway      | FastAPI          |
+| Database         | PostgreSQL       |
+| Containerization | Docker           |
+| Orchestration    | Docker Compose   |
+| Language         | Python           |
+
+---
+
+# 🔮 Future Enhancements
+
+* Agent memory persistence
+* Vector database integration
+* RAG support
+* Agent-to-agent collaboration
+* Dynamic agent discovery
+* Kubernetes deployment
+* Observability with Prometheus & Grafana
+* Role-based access control (RBAC)
+
+---
+
+# 📜 License
+
+This project is released under the MIT License.
+
+---
+
+## ⭐ Contributing
+
+Contributions, feature requests, and improvements are welcome.
+
+1. Fork the repository
+2. Create a feature branch
+3. Commit your changes
+4. Open a Pull Request
+
+---
+
+## 👨‍💻 Author
+
+Built to demonstrate enterprise-grade Multi-Agent AI architecture using Gemini, MCP, FastAPI, PostgreSQL, and Docker.
