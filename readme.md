@@ -275,27 +275,20 @@ Insert sample customer records into both schemas.
 
 # 📡 API Usage
 
-## Public Gateway Endpoint
+## FAST-API Public Gateway Endpoint
 
 The API gateway automatically routes requests to the appropriate AI agent.
 
 ### Request
 
 ```bash
-curl -X POST http://localhost:9000/insights \
-  -H "Content-Type: application/json" \
-  -d '{
-    "customer_type": "schema1",
-    "question": "Give insights"
-  }'
+curl -X POST http://localhost:9000/insights
 ```
 
 ### Response
 
 ```json
-{
-  "analysis": "Generated customer insights..."
-}
+{"jsonrpc":"2.0","id":1,"result":[{"schema":"schema1","fetched":{"jsonrpc":"2.0","id":1782218591264,"result":{"content":[{"type":"application/json","data":[{"id":1,"name":"Aarav Kumar"},{"id":2,"name":"Riya Sharma"},{"id":3,"name":"Karan Patel"},{"id":4,"name":"Sneha Reddy"},{"id":5,"name":"Vikram Singh"},{"id":6,"name":"Meera Joshi"},{"id":7,"name":"Arjun Verma"},{"id":8,"name":"Pooja Nair"},{"id":9,"name":"Rahul Mehta"},{"id":10,"name":"Divya Kapoor"}]}],"isError":false}},"analyzed":{"jsonrpc":"2.0","id":1782218591391,"result":{"content":[{"type":"text","text":"Gemini Error: [GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent: [404 Not Found] models/gemini-pro is not found for API version v1beta, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods."}],"isError":false}}},{"schema":"schema2","fetched":{"jsonrpc":"2.0","id":1782218592406,"result":{"content":[{"type":"application/json","data":[{"id":1,"name":"Sameer Khan"},{"id":2,"name":"Anita Desai"},{"id":3,"name":"Farhan Ali"},{"id":4,"name":"Lakshmi Menon"},{"id":5,"name":"Suresh Babu"},{"id":6,"name":"Nisha Kulkarni"},{"id":7,"name":"Imran Sheikh"},{"id":8,"name":"Harini Iyer"},{"id":9,"name":"Rohit Chawla"},{"id":10,"name":"Aditi Rao"}]}],"isError":false}},"analyzed":{"jsonrpc":"2.0","id":1782218592568,"result":{"content":[{"type":"text","text":"Gemini Error: [GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent: [404 Not Found] models/gemini-pro is not found for API version v1beta, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods."}],"isError":false}}}]}
 ```
 
 ---
