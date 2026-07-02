@@ -354,7 +354,7 @@ Benefits:
 | Database         | PostgreSQL       |
 | Containerization | Docker           |
 | Orchestration    | Docker Compose   |
-| Language         | Python           |
+| Language         | NodeJs           |
 
 ---
 
